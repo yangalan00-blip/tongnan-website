@@ -26,3 +26,6 @@ build/
 # ---- Local env & secrets ----
 .env
 .env.*
+
+# ---- Local test / scratch files ----
+_urltest.txt
