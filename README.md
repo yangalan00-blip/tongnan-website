@@ -7,13 +7,17 @@
 ## 目录结构
 
 ```
-browser demo/
+browser demo/            ← 本目录即网站根目录（也是 git 仓库根目录）
 ├── index.html          # 首页
-├── 404.html            # 未找到页面（Cloudflare Pages 自动使用）
+├── 404.html            # 未找到页面
 ├── style.css           # 样式
 ├── test.html / test.css  # 测试页
 ├── fonts/
 │   └── TongSquare.woff2  # 冬语字体
+├── _headers            # 响应头配置（字体 MIME、缓存）
+├── wrangler.toml       # Cloudflare Workers 配置
+├── .assetsignore       # 部署时忽略的文件
+├── package.json        # npm 脚本（dev / deploy）
 ├── .gitignore
 └── README.md
 ```
@@ -37,40 +41,38 @@ python -m http.server 8000
 ## 部署到 Cloudflare Pages
 
 本仓库与 GitHub 个人主页（`<用户名>.github.io`）相互独立，可单独部署到 Cloudflare Pages。
+## 部署到 Cloudflare Workers
 
-### 步骤
+本仓库与 GitHub 个人主页（`<用户名>.github.io`）相互独立，可单独部署到 Cloudflare。
 
-1. **推送到 GitHub**（新仓库，与个人主页仓库分开）：
+线上地址：**https://tongnan.yangalan00.workers.dev**
 
-   ```powershell
-   git init
-   git add .
-   git commit -m "Initial commit"
-   git branch -M main
-   git remote add origin https://github.com/<用户名>/tongnan-website.git
-   git push -u origin main
-   ```
+### 方式是"用 wrangler 本地部署"（当前采用）
 
-2. **连接 Cloudflare**：[Cloudflare Dashboard](https://dash.cloudflare.com) → `Workers & Pages` → `Create` → `Pages` → `Connect to Git` → 选择该仓库。
+仓库根目录就是网站根目录，配置文件为 `wrangler.toml`（`[assets]` 静态资源模式）。
 
-3. **构建设置**（静态站，全部留空）：
+**首次准备：**
 
-   | 项 | 值 |
-   | --- | --- |
-   | Framework preset | `None` |
-   | Build command | *(留空)* |
-   | Build output directory | `/` |
+```powershell
+npm install          # 安装 wrangler
+npx wrangler login   # 浏览器授权（只需一次）
+```
 
-   > 注意：本仓库的根目录就是网站根目录，所以输出目录填 `/`。
-   > 如果以后把网站放进子文件夹，则填该子文件夹名（如 `public`）。
+**每次更新：**
 
-4. **Deploy**。获得 `https://<项目名>.pages.dev` 域名。
+```powershell
+npm run deploy       # 等价于 wrangler deploy
+```
 
-5. **（可选）绑定自定义域名**：Pages 项目 → `Custom domains` → 添加域名，Cloudflare 会自动配置 DNS 与免费 HTTPS。
+> 也可以先 `npm run dev` 在本地预览（http://localhost:8787）。
 
-### 自动部署
+4. **绑定自定义域名**：Cloudflare Dashboard → Worker `tongnan` → `Settings` → `Domains & Routes` → `Add` → `Custom domain`，填入你买的域名，Cloudflare 会自动配置 DNS 与免费 HTTPS。
 
-连接 GitHub 后，每次 `git push` 到 `main` 分支，Cloudflare Pages 会自动重新部署。其他分支的推送会生成预览（Preview）部署。
+### 关于自动部署（可选）
+
+Cloudflare 也支持连接 GitHub 仓库、push 后自动构建部署。
+但截至配置时，Dashboard 自动构建因构建令牌权限问题报 "Authentication error"，
+因此当前使用**本地 wrangler 部署**方式，稳定可靠。
 
 ## 更新内容
 
@@ -80,9 +82,10 @@ python -m http.server 8000
 git add .
 git commit -m "Update content"
 git push
+npm run deploy       # 部署到 Cloudflare
 ```
 
-推送后等待约 1 分钟即可在线上看到更新。
+`git push` 只更新 GitHub 代码；`npm run deploy` 才真正更新线上网站。
 
 ## 字体说明
 

@@ -1,4 +1,13 @@
 {
+  "name": "tongnan-website",
+  "version": "1.0.0",
+  "private": true,
+  "description": "冬语（Tongnan）书写系统展示网站",
+  "scripts": {
+    "dev": "wrangler dev",
+    "deploy": "wrangler deploy",
+    "preview": "python -m http.server 8000"
+  },
   "devDependencies": {
     "wrangler": "^4.136.0"
   }

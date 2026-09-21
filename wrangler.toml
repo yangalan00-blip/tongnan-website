@@ -8,6 +8,11 @@
 name = "tongnan"
 compatibility_date = "2025-01-01"
 
+# 启用默认 workers.dev 子域地址（tongnan.yangalan00.workers.dev）
+workers_dev = true
+# 关闭预览地址，避免产生多余的 URL
+preview_urls = false
+
 # 静态资源：把仓库根目录下的所有文件作为网站内容发布
 [assets]
 directory = "."
