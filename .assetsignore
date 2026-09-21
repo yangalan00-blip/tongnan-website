@@ -1,0 +1,11 @@
+# 告诉 wrangler 上传静态资源时忽略这些文件/目录
+# 参考：https://developers.cloudflare.com/workers/static-assets/
+# 注意：_headers 要保留，Workers 静态资源会使用它设置响应头
+node_modules
+.git
+.gitignore
+wrangler.toml
+README.md
+package.json
+package-lock.json
+*.md

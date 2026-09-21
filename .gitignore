@@ -21,6 +21,7 @@ __pycache__/
 node_modules/
 dist/
 build/
+.wrangler/
 
 # ---- Local env & secrets ----
 .env
