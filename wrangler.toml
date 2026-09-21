@@ -1,0 +1,17 @@
+# Cloudflare Workers 配置 —— 纯静态资源站点
+# 文档：https://developers.cloudflare.com/workers/static-assets/
+#
+# 本项目是纯静态站点：直接由 Cloudflare 的静态资源服务托管，
+# 不需要编写 Worker 脚本。以后若要加非静态功能（如 API、KV、D1），
+# 只需在 `main` 指向一个 Worker 入口文件即可平滑升级。
+
+name = "tongnan"
+compatibility_date = "2025-01-01"
+
+# 静态资源：把仓库根目录下的所有文件作为网站内容发布
+[assets]
+directory = "."
+# 请求路径找不到文件时：
+#   "404-page" -> 使用仓库里的 404.html（我们已提供）
+#   "single-page-application" -> 全部回退到 index.html
+not_found_handling = "404-page"
