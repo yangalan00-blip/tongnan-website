@@ -1,0 +1,27 @@
+# ---- OS / editor cruft ----
+.DS_Store
+Thumbs.db
+desktop.ini
+*.swp
+*~
+
+# ---- Office temp / lock files ----
+~$*
+*.tmp
+
+# ---- Python (workspace tooling, not part of the site) ----
+.venv/
+.venv-1/
+__pycache__/
+*.pyc
+*.pyo
+.pytest_cache/
+
+# ---- Build / dependency folders ----
+node_modules/
+dist/
+build/
+
+# ---- Local env & secrets ----
+.env
+.env.*

@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Tongnan</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+
+<body>
+
+<main class="container">
+
+    <!-- ==========================
+         Header
+         ========================== -->
+
+    <h1>Tongnan</h1>
+
+    <p class="subtitle">
+        The writing system of the Tongnan language, displayed in Tongsquare font.
+    </p>
+
+
+    <!-- ==========================
+         Basic alphabet
+         ========================== -->
+
+    <section class="card">
+
+        <div class="label">
+            Alphabet
+        </div>
+
+        <!--
+            The actual text is ordinary Latin.
+            The Tongnan font changes its visual appearance.
+        -->
+
+        <div class="tongnan">
+            bpvfdtlrgk
+        </div>
+
+    </section>
+
+
+    <!-- ==========================
+         Example words
+         ========================== -->
+
+    <section class="card">
+
+        <div class="label">
+            Examples
+        </div>
+
+        <div class="tongnan">
+            tongnan
+        </div>
+
+        <div class="tongnan">
+            language
+        </div>
+
+        <div class="tongnan">
+            hello world
+        </div>
+
+    </section>
+
+
+    <!-- ==========================
+         Interactive text input
+         ========================== -->
+
+    <section class="card">
+
+        <div class="label">
+            Type
+        </div>
+
+        <textarea id="input">tongnan language</textarea>
+
+        <p class="description">
+            输入普通 Latin 字母，下面会自动使用 Tongnan 字体显示。
+        </p>
+
+        <div
+            id="output"
+            class="preview tongnan"
+        >
+            tongnan language
+        </div>
+
+
+
+    </section>
+
+
+    <!-- ==========================
+         Source comparison
+         ========================== -->
+
+    <section class="card">
+
+        <div class="label">
+            Latin → Tongnan
+        </div>
+
+        <div class="source">
+            abc def ghi jkl mno
+        </div>
+
+        <div class="tongnan">
+            bac def ghi jkl mno
+        </div>
+
+        <p class="description">
+            Tongnan 使用 Latin a–z 作为文本编码，
+            字符的视觉形式由 Tongnan 字体定义。
+        </p>
+
+    </section>
+
+</main>
+
+
+<script>
+    /* ==============================
+       Interactive preview
+       ============================== */
+
+    const input = document.getElementById("input");
+    const output = document.getElementById("output");
+
+    input.addEventListener("input", function () {
+        output.textContent = input.value;
+    });
+</script>
+
+</body>
+</html>
+
