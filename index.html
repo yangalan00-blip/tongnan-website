@@ -12,11 +12,17 @@
     <link rel="icon" type="image/webp" href="/icon_tongnan_dark_500px.webp" media="(prefers-color-scheme: dark)">
     <link rel="apple-touch-icon" href="/icon_tongnan_light_500px.webp">
 
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="/style.css">
 </head>
 
 
 <body>
+
+<!-- 装饰性背景光斑 -->
+<div class="bg-blobs" aria-hidden="true"></div>
+
+<!-- 公共导航（由 /js/site.js 注入） -->
+<div data-site-nav></div>
 
 <main class="container">
 
@@ -24,11 +30,18 @@
          Header
          ========================== -->
 
-    <h1>Tongnan</h1>
+    <header class="hero">
+        <h1>Tongnan</h1>
 
-    <p class="subtitle">
-        The writing system of the Tongnan language, displayed in Tongsquare font.
-    </p>
+        <p class="subtitle">
+            The writing system of the Tongnan language, displayed in Tongsquare font.
+        </p>
+
+        <div class="hero-actions">
+            <a class="btn btn--primary" href="/dictionary/">浏览词典</a>
+            <a class="btn btn--ghost" href="/game/">试试小游戏</a>
+        </div>
+    </header>
 
 
     <!-- ==========================
@@ -133,7 +146,9 @@
 
 </main>
 
+<div data-site-footer></div>
 
+<script src="/js/site.js"></script>
 <script>
     /* ==============================
        Interactive preview

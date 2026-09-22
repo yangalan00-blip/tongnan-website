@@ -17,9 +17,10 @@
     <style>
         .error-code {
             font-size: 96px;
-            font-weight: bold;
+            font-weight: 800;
             margin: 0;
-            color: #c9c9c9;
+            color: var(--blue);
+            opacity: 0.35;
             line-height: 1;
         }
 
@@ -32,6 +33,12 @@
 </head>
 
 <body>
+
+<!-- 装饰性背景光斑 -->
+<div class="bg-blobs" aria-hidden="true"></div>
+
+<!-- 公共导航（由 /js/site.js 注入） -->
+<div data-site-nav></div>
 
 <main class="container">
 
@@ -50,13 +57,18 @@
             The page you requested could not be found.
         </p>
 
-        <p>
-            <a href="/">← 返回首页 / Back to home</a>
-        </p>
+        <div class="hero-actions">
+            <a class="btn btn--primary" href="/">← 返回首页</a>
+            <a class="btn btn--ghost" href="/dictionary/">浏览词典</a>
+        </div>
 
     </section>
 
 </main>
+
+<div data-site-footer></div>
+
+<script src="/js/site.js"></script>
 
 </body>
 </html>

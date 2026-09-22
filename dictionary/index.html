@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>词典 — Tongnan</title>
+    <meta name="description" content="冬语（Tongnan）词典：查询拉丁拼写、Tongnan 字形与释义。">
+
+    <!-- 亮/暗模式自适应 favicon -->
+    <link rel="icon" type="image/webp" href="/icon_tongnan_light_500px.webp" media="(prefers-color-scheme: light)">
+    <link rel="icon" type="image/webp" href="/icon_tongnan_dark_500px.webp" media="(prefers-color-scheme: dark)">
+    <link rel="apple-touch-icon" href="/icon_tongnan_light_500px.webp">
+
+    <link rel="stylesheet" href="/style.css">
+</head>
+
+<body>
+
+<!-- 装饰性背景光斑（让玻璃卡片"透"起来） -->
+<div class="bg-blobs" aria-hidden="true"></div>
+
+<!-- 公共导航（由 /js/site.js 注入） -->
+<div data-site-nav></div>
+
+<main class="container">
+
+    <header class="hero">
+        <h1>词典</h1>
+        <p class="subtitle">
+            Dictionary — 查询冬语的拉丁拼写、Tongnan 字形与释义。
+        </p>
+    </header>
+
+    <!-- ==========================
+         搜索框（骨架）
+         ========================== -->
+    <section class="card">
+        <div class="label">搜索</div>
+
+        <input
+            type="search"
+            id="dict-search"
+            placeholder="输入拉丁字母或中文释义…"
+            aria-label="搜索词条"
+        >
+
+        <p class="description">
+            输入关键词即可筛选下方词条。数据来源：
+            <code>data/lexicon.json</code>（待补充）。
+        </p>
+    </section>
+
+    <!-- ==========================
+         词条列表（占位）
+         ========================== -->
+    <section class="card">
+        <div class="label">词条</div>
+
+        <ul id="dict-list" class="dict-list">
+            <li class="dict-entry">
+                <div class="tongnan dict-word">tongnan</div>
+                <div class="dict-meta">
+                    <code>tongnan</code> ・ <em>名词</em> ・ 冬语
+                </div>
+            </li>
+            <li class="dict-entry">
+                <div class="tongnan dict-word">language</div>
+                <div class="dict-meta">
+                    <code>language</code> ・ <em>名词</em> ・ 语言
+                </div>
+            </li>
+            <li class="dict-entry">
+                <div class="tongnan dict-word">hello world</div>
+                <div class="dict-meta">
+                    <code>hello world</code> ・ <em>短语</em> ・ 你好，世界
+                </div>
+            </li>
+        </ul>
+
+        <p class="description">
+            ↑ 示例词条（占位）。后续接入 <code>data/lexicon.json</code> 后动态渲染。
+        </p>
+    </section>
+
+    <!-- ==========================
+         待办说明
+         ========================== -->
+    <section class="card card--soon">
+        <div class="label">Roadmap</div>
+        <p class="description">
+            <span class="badge badge--soon">Coming soon</span>
+            词条详情页 ・ 按字母/词性筛选 ・ localStorage 收藏夹。
+        </p>
+    </section>
+
+</main>
+
+<div data-site-footer></div>
+
+<script src="/js/site.js"></script>
+<script src="/js/dictionary.js"></script>
+
+</body>
+</html>

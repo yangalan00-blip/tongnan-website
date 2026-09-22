@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>关于 — Tongnan</title>
+    <meta name="description" content="关于冬语（Tongnan）及其书写系统。">
+
+    <!-- 亮/暗模式自适应 favicon -->
+    <link rel="icon" type="image/webp" href="/icon_tongnan_light_500px.webp" media="(prefers-color-scheme: light)">
+    <link rel="icon" type="image/webp" href="/icon_tongnan_dark_500px.webp" media="(prefers-color-scheme: dark)">
+    <link rel="apple-touch-icon" href="/icon_tongnan_light_500px.webp">
+
+    <link rel="stylesheet" href="/style.css">
+</head>
+
+<body>
+
+<!-- 装饰性背景光斑 -->
+<div class="bg-blobs" aria-hidden="true"></div>
+
+<!-- 公共导航 -->
+<div data-site-nav></div>
+
+<main class="container">
+
+    <header class="hero">
+        <h1>关于冬语</h1>
+        <p class="subtitle">
+            About — 冬语（Tongnan）及其书写系统。
+        </p>
+    </header>
+
+    <!-- ==========================
+         语言简介
+         ========================== -->
+    <section class="card">
+        <div class="label">简介</div>
+        <p>
+            冬语（Tongnan）是一门人工语言（conlang）。它的书写系统
+            以普通拉丁字母 <code>a–z</code> 作为文本编码，
+            字符的<strong>视觉形式</strong>由自定义字体 <code>TongSquare</code> 定义。
+        </p>
+        <div class="tongnan">tongnan</div>
+        <p class="description">
+            上面这个词以 Tongnan 字体渲染 —— 底层文本其实是普通拉丁字符串。
+        </p>
+    </section>
+
+    <!-- ==========================
+         技术信息
+         ========================== -->
+    <section class="card">
+        <div class="label">技术信息</div>
+        <ul class="about-list">
+            <li><strong>站点类型</strong> 静态网站（Cloudflare Workers 静态资源）</li>
+            <li><strong>字体</strong> TongSquare.woff2</li>
+            <li><strong>设计</strong> 蓝白主题 ・ 卡片海报 ・ 玻璃拟态</li>
+            <li><strong>源码</strong>
+                <a href="https://github.com/yangalan00-blip/tongnan-website"
+                   target="_blank" rel="noopener">GitHub 仓库</a>
+            </li>
+        </ul>
+    </section>
+
+    <!-- ==========================
+         联系 / 待办
+         ========================== -->
+    <section class="card card--soon">
+        <div class="label">Roadmap</div>
+        <p class="description">
+            <span class="badge badge--soon">Coming soon</span>
+            作者信息 ・ 语言背景故事 ・ 多语言切换 ・ 社区词库投稿。
+        </p>
+    </section>
+
+</main>
+
+<div data-site-footer></div>
+
+<script src="/js/site.js"></script>
+
+</body>
+</html>

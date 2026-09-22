@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>小游戏 — Tongnan</title>
+    <meta name="description" content="冬语（Tongnan）小游戏：看 Tongnan 字形，选出对应的拉丁词。">
+
+    <!-- 亮/暗模式自适应 favicon -->
+    <link rel="icon" type="image/webp" href="/icon_tongnan_light_500px.webp" media="(prefers-color-scheme: light)">
+    <link rel="icon" type="image/webp" href="/icon_tongnan_dark_500px.webp" media="(prefers-color-scheme: dark)">
+    <link rel="apple-touch-icon" href="/icon_tongnan_light_500px.webp">
+
+    <link rel="stylesheet" href="/style.css">
+</head>
+
+<body>
+
+<!-- 装饰性背景光斑 -->
+<div class="bg-blobs" aria-hidden="true"></div>
+
+<!-- 公共导航 -->
+<div data-site-nav></div>
+
+<main class="container">
+
+    <header class="hero">
+        <h1>小游戏</h1>
+        <p class="subtitle">
+            Mini Game — 看 Tongnan 字形，选出正确的拉丁词。
+        </p>
+    </header>
+
+    <!-- ==========================
+         游戏主体（骨架）
+         ========================== -->
+    <section class="card">
+        <div class="label">第 <span id="game-round">1</span> 题</div>
+
+        <div class="game-question">
+            <!-- 题目：以 Tongnan 字体显示一个词 -->
+            <div id="game-prompt" class="tongnan">tongnan</div>
+        </div>
+
+        <div id="game-options" class="game-options">
+            <!-- 选项按钮由 /js/game.js 动态渲染 -->
+        </div>
+
+        <div class="game-score">
+            得分：<strong id="game-score">0</strong>
+            ／ 已答：<strong id="game-answered">0</strong>
+        </div>
+    </section>
+
+    <!-- ==========================
+         待办说明
+         ========================== -->
+    <section class="card card--soon">
+        <div class="label">Roadmap</div>
+        <p class="description">
+            <span class="badge badge--soon">Coming soon</span>
+            记忆翻牌配对 ・ 限时拼字 ・ 打字速度挑战 ・ 排行榜（需后端）。
+        </p>
+    </section>
+
+</main>
+
+<div data-site-footer></div>
+
+<script src="/js/site.js"></script>
+<script src="/js/game.js"></script>
+
+</body>
+</html>
