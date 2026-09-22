@@ -10,3 +10,4 @@ package.json
 package-lock.json
 *.md
 _urltest.txt
+_pushlog.txt
