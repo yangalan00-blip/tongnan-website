@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>即将上线 — Coming Soon | Tongnan</title>
+    <meta name="description" content="冬语（Tongnan）该功能正在开发中，敬请期待。">
+    <meta name="robots" content="noindex">
+
+    <!-- 浅色模式：深色图案 logo -->
+    <link rel="icon" type="image/webp" href="/icon_tongnan_light_500px.webp" media="(prefers-color-scheme: light)">
+    <!-- 深色模式：浅色图案 logo -->
+    <link rel="icon" type="image/webp" href="/icon_tongnan_dark_500px.webp" media="(prefers-color-scheme: dark)">
+    <link rel="apple-touch-icon" href="/icon_tongnan_light_500px.webp">
+
+    <link rel="stylesheet" href="/style.css">
+
+    <style>
+        /* 页面局部样式（不影响全站） */
+        .soon-code {
+            font-size: 72px;
+            font-weight: 800;
+            margin: 0;
+            color: var(--blue);
+            opacity: 0.35;
+            line-height: 1;
+            letter-spacing: 0.04em;
+        }
+
+        .soon-title {
+            font-family: "TongnanWeb", sans-serif;
+            font-size: 40px;
+            margin: 16px 0 8px;
+        }
+
+        .soon-target {
+            display: inline-block;
+            margin-bottom: 16px;
+            padding: 4px 12px;
+            border-radius: 999px;
+            background: rgba(37, 99, 235, 0.10);
+            color: var(--blue);
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        .soon-progress {
+            margin: 24px auto 0;
+            max-width: 320px;
+            height: 6px;
+            border-radius: 999px;
+            background: var(--border-soft);
+            overflow: hidden;
+        }
+
+        .soon-progress span {
+            display: block;
+            height: 100%;
+            width: 35%;
+            border-radius: 999px;
+            background: linear-gradient(90deg, var(--blue-light), var(--blue), var(--blue-accent));
+            animation: soon-pulse 2.4s ease-in-out infinite;
+        }
+
+        @keyframes soon-pulse {
+            0%, 100% { width: 28%; opacity: 0.85; }
+            50%      { width: 62%; opacity: 1; }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .soon-progress span { animation: none; }
+        }
+
+        .coming-soon-card {
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+
+<!-- 装饰性背景光斑 -->
+<div class="bg-blobs" aria-hidden="true"></div>
+
+<!-- 公共导航（由 /js/site.js 注入） -->
+<div data-site-nav></div>
+
+<main class="container">
+
+    <section class="card coming-soon-card">
+
+        <p class="soon-code">Coming&nbsp;Soon</p>
+
+        <h1 class="soon-title">tongnan</h1>
+
+        <!-- 目标模块名（由 coming-soon.js 根据 ?feature= 填充） -->
+        <div class="soon-target" id="soon-target">该功能</div>
+
+        <p class="subtitle">
+            本功能正在开发中 / This feature is coming soon.
+        </p>
+
+        <p class="description">
+            这里的内容还在制作中，暂时无法访问。<br>
+            敬请期待，感谢你的耐心！
+        </p>
+
+        <div class="soon-progress" aria-hidden="true"><span></span></div>
+
+        <div class="hero-actions" style="margin-top: 32px;">
+            <a class="btn btn--primary" href="/">← 返回首页</a>
+            <a class="btn btn--ghost" href="/about/">了解冬语</a>
+        </div>
+
+    </section>
+
+</main>
+
+<div data-site-footer></div>
+
+<script src="/js/site.js"></script>
+<script src="/js/coming-soon.js"></script>
+
+</body>
+</html>
