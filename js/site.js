@@ -13,6 +13,7 @@
 
     var NAV_ITEMS = [
         { href: "/",            label: "首页" },
+        { href: "/book/",       label: "文档" },
         { href: "/dictionary/", label: "词典" },
         { href: "/game/",       label: "游戏" },
         { href: "/about/",      label: "关于" }
@@ -49,9 +50,9 @@
         return (
             '<footer class="site-footer">' +
                 "<p>" +
-                    '&copy; ' + new Date().getFullYear() + " Tongnan ・ 冬语。 " +
-                    '源码：<a href="https://github.com/yangalan00-blip/tongnan-website" ' +
-                    'target="_blank" rel="noopener">GitHub</a>' +
+                    '&copy; ' + new Date().getFullYear() + " 音速海螺 Turbo Jairo ・ " +
+                    '社媒：<a href="https://space.bilibili.com/439049193?spm_id_from=333.1007.0.0" ' +
+                    'target="_blank" rel="noopener">Bilibili</a>' +
                 "</p>" +
             "</footer>"
         );

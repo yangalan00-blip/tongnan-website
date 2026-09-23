@@ -583,6 +583,255 @@ input:focus {
 
 
 /* ==============================
+   8c. 文档页（书籍排版 + 左侧大纲）
+   ============================== */
+
+/* 双栏布局：左大纲 + 右正文 */
+.book-layout {
+    display: grid;
+    grid-template-columns: 260px minmax(0, 1fr);
+    gap: var(--s4);
+    max-width: 1120px;
+    margin: 0 auto;
+    padding: var(--s4) var(--s3) var(--s5);
+    align-items: start;
+}
+
+/* —— 左侧大纲：吸顶玻璃卡 —— */
+.book-toc {
+    position: sticky;
+    top: 88px; /* 避开吸顶导航 */
+}
+
+.book-toc-inner {
+    background: var(--surface);
+    backdrop-filter: var(--blur);
+    -webkit-backdrop-filter: var(--blur);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-card), var(--inset-highlight);
+    padding: var(--s3);
+    max-height: calc(100vh - 120px);
+    overflow-y: auto;
+}
+
+.book-toc-title {
+    margin-bottom: var(--s2);
+    color: var(--text-muted);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.10em;
+    text-transform: uppercase;
+}
+
+.book-toc-nav ol {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    counter-reset: toc;
+}
+
+.book-toc-nav ol ol {
+    margin: 4px 0 4px var(--s2);
+    padding-left: var(--s2);
+    border-left: 1px solid var(--border-soft);
+}
+
+.book-toc-nav li {
+    margin: 2px 0;
+}
+
+.book-toc-nav a {
+    display: block;
+    padding: 5px 10px;
+    border-radius: var(--radius-sm);
+    color: var(--text-muted);
+    font-size: 14px;
+    text-decoration: none;
+    transition: background 0.16s ease, color 0.16s ease;
+}
+
+.book-toc-nav ol ol a {
+    font-size: 13px;
+}
+
+.book-toc-nav a:hover {
+    background: rgba(37, 99, 235, 0.08);
+    color: var(--blue);
+}
+
+.book-toc-nav a.active {
+    background: rgba(37, 99, 235, 0.12);
+    color: var(--blue);
+    font-weight: 600;
+}
+
+.book-toc-note {
+    margin: var(--s3) 0 0;
+    padding-top: var(--s2);
+    border-top: 1px solid var(--border-soft);
+    color: var(--text-muted);
+    font-size: 12px;
+    line-height: 1.6;
+}
+
+/* —— 右侧正文：书籍排版（字号偏小，便于长阅读） —— */
+.book-content {
+    background: var(--surface);
+    backdrop-filter: var(--blur);
+    -webkit-backdrop-filter: var(--blur);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-card), var(--inset-highlight);
+    padding: var(--s4) var(--s4);
+    min-width: 0;
+}
+
+.book-header {
+    padding-bottom: var(--s3);
+    margin-bottom: var(--s3);
+    border-bottom: 1px solid var(--border-soft);
+}
+
+.book-header h1 {
+    margin: 0 0 var(--s1);
+    font-size: clamp(26px, 4vw, 34px);
+}
+
+.book-subtitle {
+    margin: 0;
+    color: var(--text-muted);
+    font-size: 15px;
+}
+
+/* 书籍正文字号：比主页小，行距更大 */
+.book-section {
+    margin-bottom: var(--s4);
+    scroll-margin-top: 88px; /* 锚点跳转避开吸顶导航 */
+}
+
+.book-section:last-of-type {
+    margin-bottom: 0;
+}
+
+.book-section h2 {
+    margin: var(--s3) 0 var(--s2);
+    padding-bottom: 6px;
+    border-bottom: 1px solid var(--border-soft);
+    font-size: 20px;
+}
+
+.book-section h3 {
+    margin: var(--s3) 0 var(--s1);
+    font-size: 16px;
+    color: var(--text);
+}
+
+.book-content p {
+    margin: 0 0 var(--s2);
+    color: var(--text);
+    font-size: 15px;
+    line-height: 1.85;
+}
+
+.book-content code {
+    font-family: var(--font-mono);
+    font-size: 0.88em;
+    background: var(--surface-2);
+    padding: 1px 6px;
+    border-radius: 5px;
+}
+
+.book-content strong {
+    color: var(--text);
+    font-weight: 700;
+}
+
+/* 提示框 */
+.callout {
+    margin: var(--s3) 0;
+    padding: var(--s2) var(--s3);
+    border-left: 3px solid var(--blue);
+    border-radius: var(--radius-sm);
+    background: rgba(37, 99, 235, 0.07);
+    font-size: 14px;
+    line-height: 1.75;
+}
+
+/* 表格 */
+.book-table {
+    width: 100%;
+    margin: var(--s2) 0 var(--s3);
+    border-collapse: collapse;
+    font-size: 14px;
+}
+
+.book-table th,
+.book-table td {
+    padding: 10px 12px;
+    border-bottom: 1px solid var(--border-soft);
+    text-align: left;
+    vertical-align: middle;
+}
+
+.book-table th {
+    color: var(--text-muted);
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+}
+
+.book-table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+.book-table tbody tr:hover {
+    background: rgba(37, 99, 235, 0.05);
+}
+
+/* 正文内嵌的冬语字形（表格里用，缩小尺寸） */
+.book-inline {
+    font-size: 26px;
+    line-height: 1.2;
+}
+
+/* 示例块：上下对照 */
+.book-demo {
+    margin: var(--s2) 0 var(--s3);
+    padding: var(--s3);
+    border-radius: var(--radius-md);
+    background: var(--surface-2);
+    text-align: center;
+}
+
+.book-demo .source {
+    margin-bottom: var(--s2);
+    font-size: 15px;
+    color: var(--text-muted);
+}
+
+.book-demo .tongnan {
+    font-size: 40px;
+    margin: 0;
+}
+
+.book-footer {
+    margin-top: var(--s4);
+    padding-top: var(--s3);
+    border-top: 1px solid var(--border-soft);
+    color: var(--text-muted);
+    font-size: 13px;
+}
+
+.book-footer p {
+    margin: 0;
+    font-size: 13px;
+    color: var(--text-muted);
+}
+
+
+/* ==============================
    9. Footer
    ============================== */
 
@@ -724,6 +973,33 @@ input:focus {
 
     .container {
         padding: var(--s3) var(--s2) var(--s4);
+    }
+
+    /* 文档页：窄屏取消吸顶大纲，改为单列 */
+    .book-layout {
+        grid-template-columns: minmax(0, 1fr);
+        gap: var(--s3);
+        padding: var(--s3) var(--s2) var(--s4);
+    }
+
+    .book-toc {
+        position: static;
+    }
+
+    .book-toc-inner {
+        max-height: none;
+    }
+
+    .book-content {
+        padding: var(--s3) var(--s2);
+    }
+
+    .book-inline {
+        font-size: 22px;
+    }
+
+    .book-demo .tongnan {
+        font-size: 32px;
     }
 
     .tongnan {

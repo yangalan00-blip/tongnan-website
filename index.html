@@ -31,10 +31,12 @@
          ========================== -->
 
     <header class="hero">
-        <h1>Tongnan</h1>
+        <h1>Tongnan 冬语</h1>
 
         <p class="subtitle">
             The writing system of the Tongnan language, displayed in Tongsquare font.
+            <br>
+            冬语（Tongnan）书写系统，使用自定义字体 Tongsquare 渲染。
         </p>
 
         <div class="hero-actions">
@@ -60,11 +62,36 @@
         -->
 
         <div class="tongnan">
-            bpvfdtlrgk
+            bpvfdtl
         </div>
 
     </section>
 
+
+    <!-- ==========================
+         Interactive text input
+         ========================== -->
+
+    <section class="card">
+
+        <div class="label">
+            Transcriber
+        </div>
+
+        <p class="description">
+            <b>请注意</b>这不是翻译器，而是文本转写器，具体操作方法详见转写文档。
+        </p>
+        
+        <textarea id="input">type to trasnscribe</textarea>
+
+        <div
+            id="output"
+            class="preview tongnan"
+        >
+            tongnan language
+        </div>
+
+    </section>
 
     <!-- ==========================
          Example words
@@ -87,34 +114,6 @@
         <div class="tongnan">
             hello world
         </div>
-
-    </section>
-
-
-    <!-- ==========================
-         Interactive text input
-         ========================== -->
-
-    <section class="card">
-
-        <div class="label">
-            Type
-        </div>
-
-        <textarea id="input">tongnan language</textarea>
-
-        <p class="description">
-            输入普通 Latin 字母，下面会自动使用 Tongnan 字体显示。
-        </p>
-
-        <div
-            id="output"
-            class="preview tongnan"
-        >
-            tongnan language
-        </div>
-
-
 
     </section>
 

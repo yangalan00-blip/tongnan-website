@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>文档 — Tongnan</title>
+    <meta name="description" content="冬语（Tongnan）文档：转写规则、语言说明与参考资料。">
+
+    <!-- 亮/暗模式自适应 favicon -->
+    <link rel="icon" type="image/webp" href="/icon_tongnan_light_500px.webp" media="(prefers-color-scheme: light)">
+    <link rel="icon" type="image/webp" href="/icon_tongnan_dark_500px.webp" media="(prefers-color-scheme: dark)">
+    <link rel="apple-touch-icon" href="/icon_tongnan_light_500px.webp">
+
+    <link rel="stylesheet" href="/style.css">
+</head>
+
+<body>
+
+<!-- 装饰性背景光斑 -->
+<div class="bg-blobs" aria-hidden="true"></div>
+
+<!-- 公共导航（由 /js/site.js 注入） -->
+<div data-site-nav></div>
+
+<main class="book-layout">
+
+    <!-- ==========================
+         左侧：大纲（Summary / TOC）
+         ========================== -->
+    <aside class="book-toc" aria-label="文档大纲">
+        <div class="book-toc-inner">
+            <div class="book-toc-title">目录 / Summary</div>
+
+            <nav class="book-toc-nav">
+                <ol>
+                    <li><a href="#intro">简介</a></li>
+                    <li><a href="#transcription">转写规则</a>
+                        <ol>
+                            <li><a href="#rule-basic">基本对应</a></li>
+                            <li><a href="#rule-order">字母顺序</a></li>
+                            <li><a href="#rule-case">大小写</a></li>
+                        </ol>
+                    </li>
+                    <li><a href="#font">字体与字形</a></li>
+                    <li><a href="#examples">示例</a></li>
+                    <li><a href="#faq">常见问题</a></li>
+                </ol>
+            </nav>
+
+            <p class="book-toc-note">
+                <span class="badge badge--soon">Draft</span>
+                内容待补充，结构先行。
+            </p>
+        </div>
+    </aside>
+
+    <!-- ==========================
+         右侧：正文（书籍排版）
+         ========================== -->
+    <article class="book-content">
+
+        <header class="book-header">
+            <h1>文档</h1>
+            <p class="book-subtitle">
+                冬语（Tongnan）转写规则与语言说明
+            </p>
+        </header>
+
+        <!-- ——— 简介 ——— -->
+        <section id="intro" class="book-section">
+            <h2>简介</h2>
+            <p>
+                冬语（Tongnan）是一门人工语言。它的书写系统采用
+                <strong>普通拉丁字母 <code>a–z</code></strong> 作为文本编码，
+                字符的<strong>视觉形式</strong>由自定义字体 <code>TongSquare</code> 定义。
+            </p>
+            <p>
+                因此，在任何支持该字体的环境中，只要输入规定范围内的拉丁文本，
+                即可呈现出冬语的字形。本页面的正文即采用较小的「书籍」字号排版，
+                便于长时间阅读长文。
+            </p>
+
+            <div class="callout">
+                <strong>注意：</strong>冬语并非「翻译器」。首页的 Transcriber
+                只做<em>文本转写</em>（显示字形），不进行语义翻译。
+            </div>
+        </section>
+
+        <!-- ——— 转写规则 ——— -->
+        <section id="transcription" class="book-section">
+            <h2>转写规则</h2>
+            <p>
+                转写指的是：将拉丁文本按其字符映射为冬语字形。
+                规则简单、可逆，具体如下。
+            </p>
+
+            <h3 id="rule-basic">基本对应</h3>
+            <p>
+                每个拉丁字母对应一个冬语字形，一一映射，不合并、不省略。
+            </p>
+            <table class="book-table">
+                <thead>
+                    <tr><th>拉丁</th><th>说明</th></tr>
+                </thead>
+                <tbody>
+                    <tr><td><code>a–z</code></td><td>基础字母，逐个映射</td></tr>
+                    <tr><td>空格</td><td>保留为词间分隔</td></tr>
+                    <tr><td>其他符号</td><td>按原样保留（见 FAQ）</td></tr>
+                </tbody>
+            </table>
+
+            <h3 id="rule-order">字母顺序</h3>
+            <p>
+                转写时<strong>不改变字母顺序</strong>，仅改变每个字母的视觉呈现。
+                例如：
+            </p>
+            <div class="book-demo">
+                <div class="source">tongnan language</div>
+                <div class="tongnan">tongnan language</div>
+            </div>
+
+            <h3 id="rule-case">大小写</h3>
+            <p>
+                当前字体主要覆盖小写字母形式；建议正文统一使用小写输入，
+                以避免渲染缺失。
+            </p>
+        </section>
+
+        <!-- ——— 字体与字形 ——— -->
+        <section id="font" class="book-section">
+            <h2>字体与字形</h2>
+            <p>
+                冬语字形通过 Web 字体 <code>TongSquare.woff2</code> 提供，
+                经 <code>@font-face</code> 加载，字体族名为
+                <code>TongnanWeb</code>。
+            </p>
+            <p>
+                页面中任意元素加上 <code>.tongnan</code> 类即可启用冬语渲染：
+            </p>
+            <div class="book-demo">
+                <div class="tongnan">bpvfdtl</div>
+            </div>
+        </section>
+
+        <!-- ——— 示例 ——— -->
+        <section id="examples" class="book-section">
+            <h2>示例</h2>
+            <table class="book-table">
+                <thead>
+                    <tr><th>拉丁输入</th><th>冬语字形</th><th>含义</th></tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>tongnan</code></td>
+                        <td><span class="tongnan book-inline">tongnan</span></td>
+                        <td>冬语</td>
+                    </tr>
+                    <tr>
+                        <td><code>language</code></td>
+                        <td><span class="tongnan book-inline">language</span></td>
+                        <td>语言</td>
+                    </tr>
+                    <tr>
+                        <td><code>hello world</code></td>
+                        <td><span class="tongnan book-inline">hello world</span></td>
+                        <td>你好，世界</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- ——— FAQ ——— -->
+        <section id="faq" class="book-section">
+            <h2>常见问题</h2>
+
+            <h3>为什么某些字符显示为方块或原样？</h3>
+            <p>
+                字体仅覆盖已定义的字符集。未覆盖的符号会回退为系统字体，
+                这属于预期行为。
+            </p>
+
+            <h3>可以直接复制冬语字形吗？</h3>
+            <p>
+                复制得到的仍是底层拉丁文本，需要目标环境安装/加载该字体
+                才能正确显示。
+            </p>
+        </section>
+
+        <footer class="book-footer">
+            <p>本章内容为草案，后续将持续补充。</p>
+        </footer>
+
+    </article>
+
+</main>
+
+<div data-site-footer></div>
+
+<script src="/js/site.js"></script>
+<script src="/js/book.js"></script>
+
+</body>
+</html>
