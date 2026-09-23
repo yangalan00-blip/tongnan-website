@@ -50,9 +50,7 @@
         return (
             '<footer class="site-footer">' +
                 "<p>" +
-                    '&copy; ' + new Date().getFullYear() + " 音速海螺 Turbo Jairo ・ " +
-                    '社媒：<a href="https://space.bilibili.com/439049193?spm_id_from=333.1007.0.0" ' +
-                    'target="_blank" rel="noopener">Bilibili</a>' +
+                    '&copy; ' + new Date().getFullYear() + " 音速海螺 Turbo Jairo"+
                 "</p>" +
             "</footer>"
         );

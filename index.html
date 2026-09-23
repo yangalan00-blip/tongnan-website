@@ -34,16 +34,36 @@
         <h1>Tongnan 冬语</h1>
 
         <p class="subtitle">
-            The writing system of the Tongnan language, displayed in Tongsquare font.
-            <br>
-            冬语（Tongnan）书写系统，使用自定义字体 Tongsquare 渲染。
+            一门由 <a href="https://space.bilibili.com/439049193?spm_id_from=333.1007.0.0" target="_blank" rel="noopener">音速海螺 Turbo Jairo</a> 设计的人造语言。
         </p>
 
-        <div class="hero-actions">
-            <a class="btn btn--primary" href="/dictionary/">浏览词典</a>
-            <a class="btn btn--ghost" href="/game/">试试小游戏</a>
-        </div>
     </header>
+
+        <!-- ==========================
+         Interactive text input
+         ========================== -->
+
+    <section class="card">
+
+        <h1 class="alpha-group">
+            Transcriber · 转写器
+        </h1>
+
+        <p class="description">
+            <b>请注意</b>这不是翻译器，而是文本转写器，具体操作方法详见转写文档。
+        </p>
+        
+        <textarea id="input" placeholder="type to trasnscribe"></textarea>
+
+        <div
+            id="output"
+            class="preview tongnan"
+        >
+            
+        </div>
+
+    </section>
+
 
 
     <!-- ==========================
@@ -52,96 +72,152 @@
 
     <section class="card">
 
-        <div class="label">
-            Alphabet
+        <h1 class="alpha-group">
+            Basic Alphabet · 基础字母表
+        </h1>
+
+        <div class="alpha-toolbar">
+            <button
+                type="button"
+                id="export-alphabet"
+                class="btn btn--ghost btn--icon"
+                title="下载字母表图片"
+                aria-label="下载字母表图片"
+            >
+                <span class="btn-icon-wrap">
+                    <svg class="btn-icon" viewBox="0 0 24 24" width="18" height="18"
+                         fill="none" stroke="currentColor" stroke-width="2"
+                         stroke-linecap="round" stroke-linejoin="round"
+                         aria-hidden="true" focusable="false">
+                        <path d="M12 3v12" />
+                        <path d="M7 10l5 5 5-5" />
+                        <path d="M5 21h14" />
+                    </svg>
+                </span>
+                <span class="btn-status" aria-live="polite"></span>
+            </button>
         </div>
 
-        <!--
-            The actual text is ordinary Latin.
-            The Tongnan font changes its visual appearance.
-        -->
+        <div class="alphabet" id="alphabet-export">
 
-        <div class="tongnan">
-            bpvfdtl
+            <h3 class="alpha-group">Consonant 辅音</h3>
+            <table class="alpha-table">
+                <thead>
+                    <tr><th>字母</th><th>IPA</th><th>字母</th><th>IPA</th><th>字母</th><th>IPA</th><th>字母</th><th>IPA</th></tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="g">p</td><td class="ipa">[b]</td>
+                        <td class="g">p</td><td class="ipa">[pʰ]</td>
+                        <td class="g">v</td><td class="ipa">[v]</td>
+                        <td class="g">f</td><td class="ipa">[f]</td>
+                    </tr>
+                    <tr>
+                        <td class="g">d</td><td class="ipa">[t]</td>
+                        <td class="g">t</td><td class="ipa">[tʰ]</td>
+                        <td class="g">l</td><td class="ipa">[l]</td>
+                        <td class="g">r</td><td class="ipa">[ɾ]</td>
+                    </tr>
+                    <tr>
+                        <td class="g">g</td><td class="ipa">[k]</td>
+                        <td class="g">k</td><td class="ipa">[kʰ]</td>
+                        <td class="g">h</td><td class="ipa">[h]</td>
+                        <td class="g"></td><td class="ipa"></td>
+                    </tr>
+                    <tr>
+                        <td class="g">j</td><td class="ipa">[t͡ɕ]</td>
+                        <td class="g">q</td><td class="ipa">[t͡ɕʰ]</td>
+                        <td class="g">x</td><td class="ipa">[ɕ]</td>
+                        <td class="g">s</td><td class="ipa">[s]</td>
+                    </tr>
+                    <tr>
+                        <td class="g">m</td><td class="ipa">[m]</td>
+                        <td class="g">n</td><td class="ipa">[n]</td>
+                        <td class="g">z</td><td class="ipa">[ŋ]</td>
+                        <td class="g"></td><td class="ipa"></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3 class="alpha-group">Approximant 近音</h3>
+            <table class="alpha-table">
+                <thead>
+                    <tr><th>字母</th><th>IPA</th><th>字母</th><th>IPA</th><th>字母</th><th>IPA</th></tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="g">w</td><td class="ipa">[w]</td>
+                        <td class="g">y</td><td class="ipa">[j]</td>
+                        <td class="g">c</td><td class="ipa">[/]</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3 class="alpha-group">Vowel 元音</h3>
+            <table class="alpha-table">
+                <thead>
+                    <tr><th>字母</th><th>IPA</th><th>字母</th><th>IPA</th><th>字母</th><th>IPA</th><th>字母</th><th>IPA</th><th>字母</th><th>IPA</th></tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="g">ca</td><td class="ipa">[a]</td>
+                        <td class="g">co</td><td class="ipa">[o]</td>
+                        <td class="g">ce</td><td class="ipa">[e]</td>
+                        <td class="g">ci</td><td class="ipa">[i]</td>
+                        <td class="g">cu</td><td class="ipa">[u]</td>
+                    </tr>
+                    <tr>
+                        <td class="g">ceU</td><td class="ipa">[ɯ]</td>
+                        <td class="g">ciU</td><td class="ipa">[ɯ]</td>
+                        <td class="g">cE</td><td class="ipa">[e]</td>
+                        <td class="g"></td><td class="ipa"></td>
+                        <td class="g">Ó</td><td class="ipa">[ai]</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3 class="alpha-group">Mark 符号</h3>
+            <table class="alpha-table">
+                <thead>
+                    <tr><th>符号</th><th>名称</th><th>符号</th><th>名称</th></tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="g">cÆ</td><td class="ipa">Vowel Deletion Mark 半消音符</td>
+                        <td class="g">cÅ</td><td class="ipa">Deletion Mark 全消音符</td>
+                    </tr>
+                    <tr>
+                        <td class="g">c`</td><td class="ipa">Spreading Mark 持音符</td>
+                        <td class="g">;</td><td class="ipa">Length Mark 长音符</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3 class="alpha-group">Syllabic Letter 音节字母</h3>
+            <table class="alpha-table">
+                <thead>
+                    <tr><th>字母</th><th>IPA</th><th>字母</th><th>IPA</th><th>字母</th><th>IPA</th><th>字母</th><th>IPA</th></tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="g">Í</td><td class="ipa">[na˨]</td>
+                        <td class="g">Î</td><td class="ipa">[ma˨]</td>
+                        <td class="g">Ï</td><td class="ipa">[ŋa˨]</td>
+                        <td class="g">Ì</td><td class="ipa">[ha˨]</td>
+                    </tr>
+                    <tr>
+                        <td class="g">Ò</td><td class="ipa">[pʰa˨]</td>
+                        <td class="g">Ð</td><td class="ipa">[ta˦]</td>
+                        <td class="g">Ñ</td><td class="ipa">[taʰ˦]</td>
+                        <td class="g"></td><td class="ipa"></td>
+                    </tr>
+                </tbody>
+            </table>
+
         </div>
 
     </section>
 
-
-    <!-- ==========================
-         Interactive text input
-         ========================== -->
-
-    <section class="card">
-
-        <div class="label">
-            Transcriber
-        </div>
-
-        <p class="description">
-            <b>请注意</b>这不是翻译器，而是文本转写器，具体操作方法详见转写文档。
-        </p>
-        
-        <textarea id="input">type to trasnscribe</textarea>
-
-        <div
-            id="output"
-            class="preview tongnan"
-        >
-            tongnan language
-        </div>
-
-    </section>
-
-    <!-- ==========================
-         Example words
-         ========================== -->
-
-    <section class="card">
-
-        <div class="label">
-            Examples
-        </div>
-
-        <div class="tongnan">
-            tongnan
-        </div>
-
-        <div class="tongnan">
-            language
-        </div>
-
-        <div class="tongnan">
-            hello world
-        </div>
-
-    </section>
-
-
-    <!-- ==========================
-         Source comparison
-         ========================== -->
-
-    <section class="card">
-
-        <div class="label">
-            Latin → Tongnan
-        </div>
-
-        <div class="source">
-            abc def ghi jkl mno
-        </div>
-
-        <div class="tongnan">
-            bac def ghi jkl mno
-        </div>
-
-        <p class="description">
-            Tongnan 使用 Latin a–z 作为文本编码，
-            字符的视觉形式由 Tongnan 字体定义。
-        </p>
-
-    </section>
 
 </main>
 
@@ -149,6 +225,7 @@
 
 <script src="/js/site.js"></script>
 <script src="/js/coming-soon.js"></script>
+<script src="/js/export-alpha.js"></script>
 <script>
     /* ==============================
        Interactive preview
