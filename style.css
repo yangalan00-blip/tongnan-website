@@ -493,12 +493,95 @@ input:focus {
     box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.12);
 }
 
+
+/* ==============================
+   8b. 转写器：特殊字符选择器
+   ============================== */
+
+.char-picker {
+    margin: var(--s2) 0 var(--s1);
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 6px;
+}
+
+/* 组间分隔符：一条竖直细线（纯装饰） */
+.char-sep {
+    flex: 0 0 auto;
+    width: 1px;
+    height: 22px;
+    margin: 0 6px;
+    background: var(--border-soft);
+}
+
+/* 字符按钮：只放冬语字形 */
+.char-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 38px;
+    height: 34px;
+    padding: 0 6px;
+    border: 1px solid var(--border-soft);
+    border-radius: var(--radius-sm);
+    background: rgba(255, 255, 255, 0.55);
+    color: var(--text);
+    font-family: "TongnanWeb", var(--font-mono);
+    font-size: 1.2rem;
+    line-height: 1;
+    cursor: pointer;
+    transition: background 0.18s ease, border-color 0.18s ease, transform 0.18s ease;
+}
+
+/* 内层字形盒：
+   - inline-block 才能接受 transform（JS 写入墨迹盒居中偏移）
+   - flex 内容区尺寸，供 JS 读取盒中心
+   - 不参与任何 hover 动效，避免与居中 transform 叠加冲突
+   - 必须显式声明 font-family：全局有 `span { font-family: Times New Roman… }`
+     规则会盖掉继承自 .char-btn 的冬语字体 */
+.char-btn .char-glyph {
+    display: inline-block;
+    font-family: "TongnanWeb", var(--font-mono);
+    line-height: 1;
+    transform: translate(0, 0);
+}
+
+.char-btn:hover {
+    background: rgba(37, 99, 235, 0.10);
+    border-color: var(--blue);
+    transform: translateY(-1px);
+}
+
+.char-btn:active {
+    transform: translateY(0);
+}
+
+.char-btn:focus-visible {
+    outline: none;
+    border-color: var(--blue);
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.22);
+}
+
+/* 深色模式：玻璃底改用暗色，保证对比度 */
+@media (prefers-color-scheme: dark) {
+    .char-btn {
+        background: rgba(30, 41, 59, 0.55);
+    }
+}
+
 .preview {
+    font-size: 2rem;
     margin-top: var(--s2);
     padding: 20px;
     min-height: 100px;
     border-radius: var(--radius-sm);
     background: var(--surface-2);
+    /* 转写预览：无空格长串也可折断，保留手动换行，溢出兜底 */
+    overflow-wrap: anywhere;
+    word-break: break-word;
+    white-space: pre-wrap;
+    overflow: hidden;
 }
 
 .source {
@@ -608,8 +691,10 @@ input:focus {
     margin-top: 0;
 }
 
+/* 导出画布内的表格尺寸：全部写成固定值，
+   彻底与页面字号 token / 响应式规则解耦 */
 .alpha-export-sheet .alpha-table {
-    font-size: calc(var(--fs-md) * 1.15);
+    font-size: 23px;
 }
 
 .alpha-export-sheet .alpha-table th,
@@ -619,8 +704,21 @@ input:focus {
 }
 
 .alpha-export-sheet .alpha-table th {
+    padding: 4px 8px;
     color: #000000;
-    font-size: calc(var(--fs-2xs) * 1.25);
+    font-size: 15px;
+}
+
+.alpha-export-sheet .alpha-table td {
+    padding: 6px 8px;
+}
+
+.alpha-export-sheet .alpha-table td.g {
+    font-size: 28px;
+}
+
+.alpha-export-sheet .alpha-table td.ipa {
+    font-size: 17px;
 }
 
 .alpha-export-sheet .alpha-table td.g,
@@ -630,6 +728,27 @@ input:focus {
 
 .alpha-export-sheet .alpha-table tbody tr:hover {
     background: transparent;
+}
+
+/* 转写结果导出画布：纯文本用大字 + 保留换行 */
+.transcriber-export-sheet .transcriber-export-body {
+    font-family: "TongnanWeb", var(--font-mono);
+    font-size: 40px;
+    line-height: 1.6;
+    color: #000000;
+    white-space: pre-wrap;
+    word-break: break-word;
+    overflow-wrap: anywhere;
+}
+
+/* 右下角灰色水印网址 */
+.transcriber-export-sheet .transcriber-export-footer {
+    margin-top: var(--s4);
+    text-align: right;
+    font-family: var(--font-body);
+    font-size: 14px;
+    letter-spacing: 0.04em;
+    color: #9CA3AF;
 }
 
 .alpha-group {
@@ -723,6 +842,26 @@ h1.alpha-group:first-child {
     margin-top: 0;
 }
 
+/* 分组标题内的文字：占据剩余空间，按钮被推到右端 */
+/* 注意：全局 span 规则会把字体改成 Times New Roman，这里重新声明回正文字体 */
+.alpha-group-title {
+    flex: 1 1 auto;
+    min-width: 0;
+    font-family: var(--font-body);
+}
+
+/* 标题内嵌工具条：与标题同一行、垂直居中、无外边距 */
+h1.alpha-group .alpha-toolbar {
+    flex: 0 0 auto;
+    margin: 0;
+    z-index: 1;
+}
+
+/* 标题内嵌图标按钮：沿用玻璃风格，稍微收紧内边距 */
+h1.alpha-group .alpha-toolbar .btn--icon {
+    padding: 6px 10px;
+}
+
 .alpha-table {
     width: 100%;
     border-collapse: collapse;
@@ -770,6 +909,31 @@ h1.alpha-group:first-child {
     font-size: var(--fs-sm);
     color: var(--text-muted);
     white-space: nowrap;
+}
+
+/* 窄屏：等比缩小整张表，避免超出卡片
+   排除 .alpha-export-sheet —— 导出画布有独立的离屏尺寸，
+   不受移动端视口影响（PNG 输出保持原字号） */
+.alpha-table:not(.alpha-export-sheet .alpha-table) {
+    font-size: 0.85rem;
+}
+
+.alpha-table:not(.alpha-export-sheet .alpha-table) th {
+    padding: 3px 5px;
+    font-size: 0.6rem;
+    letter-spacing: 0.03em;
+}
+
+.alpha-table:not(.alpha-export-sheet .alpha-table) td {
+    padding: 4px 5px;
+}
+
+.alpha-table:not(.alpha-export-sheet .alpha-table) td.g {
+    font-size: 0.95rem;
+}
+
+.alpha-table:not(.alpha-export-sheet .alpha-table) td.ipa {
+    font-size: 0.7rem;
 }
 
 
@@ -1304,5 +1468,73 @@ h1.alpha-group:first-child {
 
     .tongnan {
         font-size: 2.5rem;
+    }
+
+    /* 字母表：窄屏整体缩小，避免横向溢出卡片。
+       选择器用 :not(...) 排除导出画布内的表格，
+       保证 PNG 导出的字号与桌面端完全一致。 */
+    .alpha-table:not(.alpha-export-sheet .alpha-table) {
+        font-size: 0.82rem;
+    }
+
+    .alpha-table:not(.alpha-export-sheet .alpha-table) th {
+        padding: 3px 4px;
+        font-size: 0.58rem;
+        letter-spacing: 0.02em;
+    }
+
+    .alpha-table:not(.alpha-export-sheet .alpha-table) td {
+        padding: 4px 4px;
+    }
+
+    .alpha-table:not(.alpha-export-sheet .alpha-table) td.g {
+        font-size: 0.9rem;
+    }
+
+    /* IPA 列在窄屏允许换行：其中一处是「名称」说明文字
+       （如 Vowel Deletion Mark 半消音符），nowrap 会把整表撑宽 */
+    .alpha-table:not(.alpha-export-sheet .alpha-table) td.ipa {
+        font-size: 0.68rem;
+        white-space: normal;
+    }
+
+    /* 特殊字符选择器：线性排列，窄屏再收紧间距 */
+    .char-picker {
+        gap: 5px;
+    }
+    .char-sep {
+        height: 20px;
+        margin: 0 4px;
+    }
+    .char-btn {
+        min-width: 34px;
+        height: 32px;
+        font-size: 1.05rem;
+    }
+}
+
+
+/* 超窄屏（≤480px）：再降一档字号 */
+@media (max-width: 480px) {
+    .alpha-table:not(.alpha-export-sheet .alpha-table) {
+        font-size: 0.75rem;
+    }
+
+    .alpha-table:not(.alpha-export-sheet .alpha-table) th {
+        padding: 3px 3px;
+        font-size: 0.54rem;
+        letter-spacing: 0.01em;
+    }
+
+    .alpha-table:not(.alpha-export-sheet .alpha-table) td {
+        padding: 3px 3px;
+    }
+
+    .alpha-table:not(.alpha-export-sheet .alpha-table) td.g {
+        font-size: 0.82rem;
+    }
+
+    .alpha-table:not(.alpha-export-sheet .alpha-table) td.ipa {
+        font-size: 0.62rem;
     }
 }

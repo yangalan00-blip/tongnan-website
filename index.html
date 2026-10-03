@@ -45,23 +45,51 @@
 
     <section class="card">
 
-        <h1 class="alpha-group">
-            Transcriber · 转写器
+        <h1 class="alpha-group" id="transcriber">
+            <span class="alpha-group-title">Transcriber · 转写器</span>
+
+            <div class="alpha-toolbar hidden-until-loaded">
+                <button
+                    type="button"
+                    id="export-transcriber"
+                    class="btn btn--ghost btn--icon"
+                    title="下载转写结果图片"
+                    aria-label="下载转写结果图片"
+                >
+                    <span class="btn-icon-wrap">
+                        <svg class="btn-icon" viewBox="0 0 24 24" width="18" height="18"
+                             fill="none" stroke="currentColor" stroke-width="2"
+                             stroke-linecap="round" stroke-linejoin="round"
+                             aria-hidden="true" focusable="false">
+                            <path d="M12 3v12" />
+                            <path d="M7 10l5 5 5-5" />
+                            <path d="M5 21h14" />
+                        </svg>
+                    </span>
+                    <span class="btn-status" aria-live="polite"></span>
+                </button>
+            </div>
         </h1>
 
         <p class="description">
-            <b>请注意</b>这不是翻译器，而是文本转写器，具体操作方法详见转写文档。
+            <b>请注意</b>这不是翻译器，而是文本转写器，具体操作方法详见转写文档(开发中)
         </p>
-        
-        <textarea id="input" placeholder="type to trasnscribe"></textarea>
 
         <div
             id="output"
             class="preview tongnan"
         >
-            
         </div>
 
+        <textarea id="input" placeholder="type to trasnscribe"></textarea>
+
+        <!-- 特殊字符按钮（由 /js/char-picker.js 注入） -->
+        <div
+            id="char-picker"
+            class="char-picker"
+            role="group"
+            aria-label="插入冬语特殊字符"
+        ></div>
     </section>
 
 
@@ -72,7 +100,7 @@
 
     <section class="card">
 
-        <h1 class="alpha-group">
+        <h1 class="alpha-group" id="alphabet">
             Basic Alphabet · 基础字母表
         </h1>
 
@@ -226,6 +254,9 @@
 <script src="/js/site.js"></script>
 <script src="/js/coming-soon.js"></script>
 <script src="/js/export-alpha.js"></script>
+<script src="/js/export-transcriber.js"></script>
+<script src="/js/tongnan-chars.js"></script>
+<script src="/js/char-picker.js"></script>
 <script>
     /* ==============================
        Interactive preview
@@ -236,8 +267,11 @@
 
     input.addEventListener("input", function () {
         output.textContent = input.value;
+        // 文本更新后再自适应字号（无论是否溢出都重算）
+        if (window.fitTongnanPreview) { window.fitTongnanPreview(); }
     });
 </script>
+<script src="/js/fit-output.js"></script>
 
 </body>
 </html>

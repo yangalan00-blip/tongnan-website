@@ -26,6 +26,7 @@
             opacity: 0.35;
             line-height: 1;
             letter-spacing: 0.04em;
+            white-space: nowrap;
         }
 
         .soon-target {
@@ -64,6 +65,15 @@
 
         @media (prefers-reduced-motion: reduce) {
             .soon-progress span { animation: none; }
+        }
+
+        /* 窄屏：缩小标题字号，避免 nowrap 文字溢出卡片 */
+        @media (max-width: 640px) {
+            .soon-code {
+                font-size: 40px;
+                letter-spacing: 0.02em;
+                margin-bottom: 20px;
+            }
         }
 
         .coming-soon-card {
