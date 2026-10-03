@@ -242,6 +242,45 @@ a:hover {
     letter-spacing: -0.01em;
 }
 
+/* 主题切换按钮（导航最右侧） */
+.theme-toggle {
+    flex: 0 0 auto;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 34px;
+    height: 34px;
+    padding: 0;
+    margin-left: var(--s1);
+    border: 1px solid var(--border-soft);
+    border-radius: var(--radius-md);
+    background: rgba(255, 255, 255, 0.55);
+    color: var(--text);
+    font-size: 1.05rem;
+    line-height: 1;
+    cursor: pointer;
+    transition: background 0.18s ease, color 0.18s ease,
+                border-color 0.18s ease, transform 0.18s ease;
+}
+
+.theme-toggle:hover {
+    background: rgba(37, 99, 235, 0.10);
+    border-color: var(--blue);
+    color: var(--blue);
+    transform: translateY(-1px);
+}
+
+.theme-toggle:focus-visible {
+    outline: none;
+    border-color: var(--blue);
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.22);
+}
+
+.theme-toggle .theme-toggle-icon {
+    font-family: var(--font-body);
+    line-height: 1;
+}
+
 .site-nav .brand .dot {
     color: var(--blue);
 }
@@ -565,9 +604,13 @@ input:focus {
 
 /* 深色模式：玻璃底改用暗色，保证对比度 */
 @media (prefers-color-scheme: dark) {
-    .char-btn {
+    :root:not([data-theme="light"]) .char-btn {
         background: rgba(30, 41, 59, 0.55);
     }
+}
+
+html[data-theme="dark"] .char-btn {
+    background: rgba(30, 41, 59, 0.55);
 }
 
 .preview {
@@ -1384,8 +1427,9 @@ h1.alpha-group .alpha-toolbar .btn--icon {
    12. 深色模式
    ============================== */
 
+/* 深色令牌（两种触发方式共用）：系统偏好 或 显式 data-theme="dark" */
 @media (prefers-color-scheme: dark) {
-    :root {
+    :root:not([data-theme="light"]) {
         --bg:             linear-gradient(135deg, #0B1220, #0F172A 40%, #0B1220);
         --surface:        rgba(30, 41, 59, 0.55);
         --surface-solid:  #1E293B;
@@ -1397,30 +1441,72 @@ h1.alpha-group .alpha-toolbar .btn--icon {
         --inset-highlight: inset 0 1px 0 rgba(255, 255, 255, 0.06);
     }
 
-    .site-nav {
+    :root:not([data-theme="light"]) .site-nav {
         background: rgba(15, 23, 42, 0.62);
     }
 
-    textarea,
-    input[type="text"],
-    input[type="search"] {
+    :root:not([data-theme="light"]) textarea,
+    :root:not([data-theme="light"]) input[type="text"],
+    :root:not([data-theme="light"]) input[type="search"] {
         background: rgba(15, 23, 42, 0.55);
         color: var(--text);
     }
 
-    .btn--ghost {
+    :root:not([data-theme="light"]) .btn--ghost {
         background: rgba(30, 41, 59, 0.55);
         color: var(--blue-light);
     }
 
-    .badge--new {
+    :root:not([data-theme="light"]) .badge--new {
         color: var(--blue-accent);
     }
 
-    .bg-blobs::before,
-    .bg-blobs::after {
+    :root:not([data-theme="light"]) .bg-blobs::before,
+    :root:not([data-theme="light"]) .bg-blobs::after {
         opacity: 0.30;
     }
+}
+
+/* 显式选择深色：不依赖系统偏好 */
+html[data-theme="dark"] {
+    --bg:             linear-gradient(135deg, #0B1220, #0F172A 40%, #0B1220);
+    --surface:        rgba(30, 41, 59, 0.55);
+    --surface-solid:  #1E293B;
+    --surface-2:      rgba(30, 41, 59, 0.70);
+    --border:         rgba(255, 255, 255, 0.12);
+    --border-soft:    rgba(148, 163, 184, 0.18);
+    --text:           #E2E8F0;
+    --text-muted:     #94A3B8;
+    --inset-highlight: inset 0 1px 0 rgba(255, 255, 255, 0.06);
+}
+
+html[data-theme="dark"] .site-nav {
+    background: rgba(15, 23, 42, 0.62);
+}
+
+html[data-theme="dark"] textarea,
+html[data-theme="dark"] input[type="text"],
+html[data-theme="dark"] input[type="search"] {
+    background: rgba(15, 23, 42, 0.55);
+    color: var(--text);
+}
+
+html[data-theme="dark"] .btn--ghost {
+    background: rgba(30, 41, 59, 0.55);
+    color: var(--blue-light);
+}
+
+html[data-theme="dark"] .badge--new {
+    color: var(--blue-accent);
+}
+
+html[data-theme="dark"] .bg-blobs::before,
+html[data-theme="dark"] .bg-blobs::after {
+    opacity: 0.30;
+}
+
+html[data-theme="dark"] .theme-toggle {
+    background: rgba(30, 41, 59, 0.55);
 }
 
 
@@ -1434,7 +1520,14 @@ h1.alpha-group .alpha-toolbar .btn--icon {
         gap: var(--s1) var(--s2);
     }
 
+    /* 窄屏：品牌 + 主题按钮并排在第一行（按钮靠右），导航换到第二行 */
+    .site-nav .theme-toggle {
+        order: 1;
+        margin-left: auto;
+    }
+
     .site-nav nav {
+        order: 2;
         width: 100%;
         margin-left: 0;
         overflow-x: auto;

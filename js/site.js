@@ -31,6 +31,71 @@
         return norm.indexOf(href) === 0;
     }
 
+    /* —— 主题（浅色/深色）—— */
+    var THEME_KEY = "tongnan-theme";
+
+    function storedTheme() {
+        try {
+            var v = window.localStorage.getItem(THEME_KEY);
+            return v === "light" || v === "dark" ? v : null;
+        } catch (e) {
+            return null;
+        }
+    }
+
+    function effectiveTheme() {
+        var saved = storedTheme();
+        if (saved) { return saved; }
+        return window.matchMedia &&
+               window.matchMedia("(prefers-color-scheme: dark)").matches
+            ? "dark" : "light";
+    }
+
+    /* 把主题写到 <html data-theme>，供 CSS 选择 */
+    function applyTheme(theme) {
+        document.documentElement.setAttribute("data-theme", theme);
+    }
+
+    function toggleTheme() {
+        var next = effectiveTheme() === "dark" ? "light" : "dark";
+        try { window.localStorage.setItem(THEME_KEY, next); } catch (e) { /* 忽略 */ }
+        applyTheme(next);
+        syncThemeButton();
+    }
+
+    /* 同步按钮图标 / 无障碍标签 */
+    function syncThemeButton() {
+        var btn = document.querySelector(".theme-toggle");
+        if (!btn) { return; }
+        var isDark = effectiveTheme() === "dark";
+        btn.setAttribute("aria-pressed", isDark ? "true" : "false");
+        btn.setAttribute(
+            "aria-label",
+            isDark ? "切换到浅色模式" : "切换到深色模式"
+        );
+        btn.setAttribute("title", isDark ? "浅色模式" : "深色模式");
+        btn.innerHTML =
+            '<span class="theme-toggle-icon" aria-hidden="true">' +
+            (isDark ? "☀" : "☾") +
+            "</span>";
+    }
+
+    function initTheme() {
+        applyTheme(effectiveTheme());
+        // 未做显式选择时，跟随系统切换
+        if (window.matchMedia) {
+            var mq = window.matchMedia("(prefers-color-scheme: dark)");
+            var onChange = function () {
+                if (!storedTheme()) {
+                    applyTheme(effectiveTheme());
+                    syncThemeButton();
+                }
+            };
+            if (mq.addEventListener) { mq.addEventListener("change", onChange); }
+            else if (mq.addListener) { mq.addListener(onChange); }
+        }
+    }
+
     function buildNav() {
         var links = NAV_ITEMS.map(function (item) {
             var current = isCurrent(item.href) ? ' aria-current="page"' : "";
@@ -42,6 +107,9 @@
             '<header class="site-nav">' +
                 '<a class="brand" href="/">Tongnan<span class="dot">.</span></a>' +
                 "<nav>" + links + "</nav>" +
+                '<button type="button" class="theme-toggle" aria-label="切换主题">' +
+                    '<span class="theme-toggle-icon" aria-hidden="true">☾</span>' +
+                "</button>" +
             "</header>"
         );
     }
@@ -57,9 +125,17 @@
     }
 
     function inject() {
+        initTheme();
+
         var navHost = document.querySelector("[data-site-nav]");
         if (navHost) {
             navHost.outerHTML = buildNav();
+
+            var toggle = document.querySelector(".theme-toggle");
+            if (toggle) {
+                toggle.addEventListener("click", toggleTheme);
+                syncThemeButton();
+            }
         }
 
         var footerHost = document.querySelector("[data-site-footer]");
@@ -73,4 +149,18 @@
     } else {
         inject();
     }
+})();
+
+/* —— 尽早应用主题，避免首屏闪烁（FOUC）—— */
+(function () {
+    "use strict";
+    try {
+        var saved = window.localStorage.getItem("tongnan-theme");
+        var theme = (saved === "light" || saved === "dark")
+            ? saved
+            : (window.matchMedia &&
+               window.matchMedia("(prefers-color-scheme: dark)").matches
+                ? "dark" : "light");
+        document.documentElement.setAttribute("data-theme", theme);
+    } catch (e) { /* 忽略 */ }
 })();
