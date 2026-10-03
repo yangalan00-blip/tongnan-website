@@ -731,6 +731,12 @@ input:focus {
 }
 
 /* 转写结果导出画布：纯文本用大字 + 保留换行 */
+/* 固定内容宽度，让超长文本按页面一样折行，避免导出图片过宽 */
+.transcriber-export-sheet {
+    width: 960px;
+    box-sizing: border-box;
+}
+
 .transcriber-export-sheet .transcriber-export-body {
     font-family: "TongnanWeb", var(--font-mono);
     font-size: 40px;

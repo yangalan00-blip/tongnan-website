@@ -93,6 +93,30 @@
         var body = document.createElement("div");
         body.className = "transcriber-export-body tongnan";
         body.textContent = text || "";
+
+        // —— 让导出与「转写预览」保持一致的换行/字号 ——
+        // 复制预览区（#output）实际生效的字号与换行方式，
+        // 并把导出画布的内容宽度对齐预览区的内容宽度，
+        // 使导出图片的折行位置与页面上看到的一致，避免超长文本导出成一张过宽的图。
+        var src = document.getElementById("output");
+        if (src) {
+            var cs = getComputedStyle(src);
+            body.style.fontSize = cs.fontSize;
+            body.style.whiteSpace = (cs.whiteSpace === "nowrap") ? "nowrap" : "pre-wrap";
+
+            // 预览区可用于文本的内容宽度（扣除其左右内边距）
+            var contentW =
+                src.clientWidth -
+                parseFloat(cs.paddingLeft || 0) -
+                parseFloat(cs.paddingRight || 0);
+
+            // 导出画布左右各 32px 内边距，故 sheet 宽度 = 内容宽度 + 64
+            if (contentW > 0) {
+                sheet.style.width = (contentW + 64) + "px";
+                sheet.style.boxSizing = "border-box";
+            }
+        }
+
         sheet.appendChild(body);
 
         // 右下角灰色水印网址
